@@ -23,5 +23,22 @@ userRoute.get('/users/:uuid', (req: Request<{ uuid : string}>, res: Response, ne
     res.status(statusCodes.OK).send({uuid});
 })
 
+userRoute.post('/users', (req : Request, res: Response, next: NextFunction) => {
+    const newUser = req.body;
+    res.status(statusCodes.CREATED).send(newUser);
+})
+
+userRoute.put('/users/:uuid', (req: Request<{uuid : string}>, res : Response, next: NextFunction) => {
+    const uuid = req.params.uuid;
+    const modifiendUser = req.body;
+    modifiendUser.uuid = uuid;
+    res.status(statusCodes.OK).send(modifiendUser)
+})
+
+userRoute.delete('/users/:uuid', (req: Request<{uuid: string}>, res: Response, next: NextFunction) =>{
+    const uuid = req.params.uuid;
+
+    res.status(statusCodes.OK).send({message: "usuario removido"})
+})
 
 export default userRoute;
